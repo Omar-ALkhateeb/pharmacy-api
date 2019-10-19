@@ -13,4 +13,6 @@ type StockIn struct {
 	PricePerProduct   float32 `gorm:"not_null"`
 	TransactionNumber string  `gorm:"unique_index;not_null"`
 	Note              string
+	OrderedQuantity   int
+	ReceivedQuantity  int
 }
