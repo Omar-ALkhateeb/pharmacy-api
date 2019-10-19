@@ -12,4 +12,5 @@ type StockOut struct {
 	Product         Product
 	PricePerProduct float32 `gorm:"not_null"`
 	Note            string
+	Quantity        int
 }
