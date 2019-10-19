@@ -1,11 +1,11 @@
 package database
 
-import models "github.com/dwahyudi/inventory/internal/app"
+import "github.com/dwahyudi/inventory/internal/app/types"
 
 func Migrate() {
 	// Using auto migration feature from GORM framework.
 	DBConn.AutoMigrate(
-		&models.Product{},
-		&models.StockIn{},
-		&models.StockOut{})
+		&types.Product{},
+		&types.StockIn{},
+		&types.StockOut{})
 }
