@@ -11,7 +11,7 @@ var (
 
 func Init() {
 	var err error
-	DBConn, err = gorm.Open("sqlite3", "./shop.db")
+	DBConn, err = gorm.Open("sqlite3", "./inventory.db")
 	if err != nil {
 		panic(err)
 	}
