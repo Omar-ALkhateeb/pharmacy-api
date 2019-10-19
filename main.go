@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"github.com/dwahyudi/inventory/configs/routes"
+	"log"
+)
 
 func main() {
-	fmt.Println("Starting from a template")
+	web := routes.GenerateRoutes()
+
+	log.Fatal(web.Run())
 }
