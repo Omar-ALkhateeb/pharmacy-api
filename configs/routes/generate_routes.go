@@ -1,18 +1,13 @@
 package routes
 
 import (
+	"github.com/dwahyudi/inventory/internal/app/handlers"
 	"github.com/gin-gonic/gin"
 )
 
 func GenerateRoutes() *gin.Engine {
 	web := gin.Default()
-	web.GET("/ping", HandlePing)
+	web.GET("/ping", handlers.HandlePing)
 
 	return web
-}
-
-func HandlePing(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"message": "pong",
-	})
 }
