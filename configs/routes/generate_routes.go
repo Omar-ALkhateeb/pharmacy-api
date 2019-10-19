@@ -9,5 +9,7 @@ func GenerateRoutes() *gin.Engine {
 	web := gin.Default()
 	web.GET("/ping", handlers.HandlePing)
 
+	web.POST("v1/products", handlers.CreateProduct)
+
 	return web
 }
