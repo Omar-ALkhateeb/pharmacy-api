@@ -11,8 +11,8 @@ import (
 )
 
 func SalesReport(c *gin.Context) {
-	queryParams := c.Request.URL.Query()
-	salesReports := services.SalesReportCalculate(queryParams["start_date"][0], queryParams["end_date"][0])
+	startDate, endDate := services.DecideDate(c)
+	salesReports := services.SalesReportCalculate(startDate, endDate)
 	bytesBuffer := &bytes.Buffer{}
 	csvWriter := csv.NewWriter(bytesBuffer)
 
