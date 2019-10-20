@@ -36,6 +36,6 @@ func SalesReport(c *gin.Context) {
 	}
 
 	c.Header("Content-Description", "File Transfer")
-	c.Header("Content-Disposition", "attachment; filename=inventory_valuation.csv")
+	c.Header("Content-Disposition", "attachment; filename=sales_report.csv")
 	c.Data(http.StatusOK, "text/csv", bytesBuffer.Bytes())
 }
