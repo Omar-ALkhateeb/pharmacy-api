@@ -35,3 +35,60 @@ Project structure:
   4. `app/paramstypes` contains structs to handle incoming web parameters.
   5. `app/reporttypes` contains structs to handle report data modelling.
 * `configs/` contains configurations such as simple database connection and migration and routings.
+
+Request Samples:
+(Check `configs/routes` for more detail.)
+
+Create product (user must create product before creating stock in and stock out).
+
+```
+POST /v1/products HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+cache-control: no-cache
+
+{
+	"sku": "A0",
+	"name": "drawing book"
+}
+```
+
+Create Stock-in, must provide SKU of already made product.
+
+```
+POST /v1/stock_ins HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+cache-control: no-cache
+
+{
+	"sku": "A0",
+	"price_per_product": 11000.0,
+	"transaction_number": "T0",
+	"ordered_quantity": 100,
+	"received_quantity": 100
+}
+```
+
+Create Stock-out, also must provide valid product SKU.
+
+```
+POST /v1/stock_outs HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+cache-control: no-cache
+
+{
+	"sku": "A0",
+	"price_per_product": 15000.0,
+	"quantity": 80
+}
+```
+
+Get Inventory Valuation Report in CSV
+
+```
+GET /v1/reports/inventory_valuation.csv HTTP/1.1
+Host: localhost:8080
+cache-control: no-cache
+```
