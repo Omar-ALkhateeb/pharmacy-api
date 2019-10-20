@@ -13,5 +13,7 @@ func GenerateRoutes() *gin.Engine {
 
 	web.POST("v1/stock_ins", handlers.CreateStockIn)
 
+	web.POST("v1/stock_outs", handlers.CreateStockOut)
+
 	return web
 }
