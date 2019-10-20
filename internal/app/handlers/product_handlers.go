@@ -13,9 +13,9 @@ func CreateProduct(c *gin.Context) {
 	responseMessage := ""
 	if c.ShouldBind(&product) == nil {
 		if errors := database.DBConn.Create(&types.Product{
-			Name:            product.Name,
-			Sku:             product.Sku,
-			CurrentQuantity: product.CurrentQuantity}).GetErrors(); len(errors) > 0 {
+			Name: product.Name,
+			Sku:  product.Sku,
+		}).GetErrors(); len(errors) > 0 {
 			responseCode = 422
 			for _, err := range errors {
 				responseMessage = responseMessage + ", " + err.Error()
