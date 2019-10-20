@@ -7,7 +7,8 @@ import (
 )
 
 func SalesReportSummary(c *gin.Context) {
-	salesReportData := services.SalesReportCalculate()
+	queryParams := c.Request.URL.Query()
+	salesReportData := services.SalesReportCalculate(queryParams["start_date"][0], queryParams["end_date"][0])
 	var totalProfitLoss float32 = 0.0
 	var totalRevenue float32 = 0.0
 	var salesCount int = 0

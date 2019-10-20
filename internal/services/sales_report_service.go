@@ -4,11 +4,12 @@ import (
 	"github.com/dwahyudi/inventory/configs/database"
 	"github.com/dwahyudi/inventory/internal/app/reporttypes"
 	"github.com/dwahyudi/inventory/internal/app/types"
+	"time"
 )
 
 // Get inventory valuations in order to get buy price.
 // Then for each stock out, obtain product buy price, then calculate the profit/loss.
-func SalesReportCalculate() []reporttypes.SalesReport {
+func SalesReportCalculate(startDateString string, endDateString string) []reporttypes.SalesReport {
 	db := database.DBConn
 	inventoryValuations := InventoryValuationCalculate()
 	var salesReports []reporttypes.SalesReport
@@ -19,7 +20,12 @@ func SalesReportCalculate() []reporttypes.SalesReport {
 		skuAndAvgBuyPrices[iv.ProductSku] = iv.ProductAvgPurchasePrice
 	}
 
-	db.Preload("Product").Find(&stockOuts)
+	startDate, _ := time.Parse(time.RFC3339, startDateString+"T00:00:00.000Z")
+	endDate, _ := time.Parse(time.RFC3339, endDateString+"T23:59:59.000Z")
+
+	db.Preload("Product").
+		Where("created_at BETWEEN ? AND ?", startDate, endDate).
+		Find(&stockOuts)
 
 	for _, stockOut := range stockOuts {
 		var salesReport = reporttypes.SalesReport{}
