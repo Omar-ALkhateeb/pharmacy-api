@@ -23,8 +23,8 @@ func InventoryValuation(c *gin.Context) {
 	// CSV Content
 	for _, iv := range inventoryValuations {
 		row := []string{iv.ProductSku, iv.ProductName, fmt.Sprintf("%d", iv.ProductQuantity),
-			fmt.Sprintf("%f", iv.ProductAvgPurchasePrice),
-			fmt.Sprintf("%f", iv.ProductTotalPurchasePrice)}
+			fmt.Sprintf("IDR %.2f", iv.ProductAvgPurchasePrice),
+			fmt.Sprintf("IDR %.2f", iv.ProductTotalPurchasePrice)}
 		_ = csvWriter.Write(row)
 	}
 
