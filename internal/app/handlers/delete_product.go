@@ -28,7 +28,8 @@ func DeleteProduct(c *gin.Context) {
 		hasStockIn = true
 	}
 
-	stockOut := types.StockIn{}
+	// Check stock-out
+	stockOut := types.StockOut{}
 	var hasStockOut bool = false
 	if err := db.Where("product_id = ?", productId).First(&stockOut).Error; err == nil {
 		hasStockOut = true
