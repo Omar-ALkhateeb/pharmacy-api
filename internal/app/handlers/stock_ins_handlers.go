@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"github.com/dwahyudi/inventory/configs/database"
 	"github.com/dwahyudi/inventory/internal/app/paramstypes"
 	"github.com/dwahyudi/inventory/internal/app/types"
@@ -22,11 +21,9 @@ func CreateStockIn(c *gin.Context) {
 	if c.ShouldBind(&StockInParams) == nil {
 		var product types.Product
 		if err := db.Where("sku = ?", StockInParams.Sku).First(&product).Error; err != nil {
-			fmt.Println("white")
 			c.String(422, "Product does not exist")
 			return
 		} else {
-			fmt.Println("blue")
 			newQuantity := product.CurrentQuantity + StockInParams.ReceivedQuantity
 			db.Model(&product).Update(types.Product{CurrentQuantity: newQuantity})
 		}
