@@ -16,6 +16,11 @@ func InventoryValuation(c *gin.Context) {
 	bytesBuffer := &bytes.Buffer{}
 	csvWriter := csv.NewWriter(bytesBuffer)
 
+	// CSV header
+	headerRow := []string{"SKU", "Nama Item", "Jumlah", "Rata-Rata Harga Beli", "Total"}
+	_ = csvWriter.Write(headerRow)
+
+	// CSV Content
 	for _, iv := range inventoryValuations {
 		row := []string{iv.ProductSku, iv.ProductName, fmt.Sprintf("%d", iv.ProductQuantity),
 			fmt.Sprintf("%f", iv.ProductAvgPurchasePrice),
