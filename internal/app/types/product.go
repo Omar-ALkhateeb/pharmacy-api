@@ -11,3 +11,9 @@ type Product struct {
 	StockIns  []StockIn
 	StockOuts []StockOut
 }
+
+type ProductInView struct {
+	Sku             string
+	Name            string
+	CurrentQuantity int
+}
