@@ -15,6 +15,13 @@ func SalesReport(c *gin.Context) {
 	bytesBuffer := &bytes.Buffer{}
 	csvWriter := csv.NewWriter(bytesBuffer)
 
+	// CSV header
+	headerRow := []string{"ID Pesanan", "Waktu", "SKU", "Nama Barang", "Jumlah",
+		"Harga Jual per Produk", "Total Harga Jual", "Harga Beli per Produk",
+		"Total Harga Beli", "Laba/Rugi"}
+	_ = csvWriter.Write(headerRow)
+
+	// CSV content
 	for _, rep := range salesReports {
 		row := []string{rep.SalesNote, rep.Time.String(), rep.ProductSku,
 			rep.ProductName, string(rep.Quantity), fmt.Sprintf("%f", rep.SellPricePerProduct),
