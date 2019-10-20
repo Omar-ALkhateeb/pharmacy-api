@@ -34,15 +34,16 @@ Record inventory/stocks for products.
   3. `services` contains generic reusable services.
   4. `app/paramstypes` contains structs to handle incoming web parameters.
   5. `app/reporttypes` contains structs to handle report data modelling.
-* `configs/` contains configurations such as simple database connection and migration and routings.
+* `configs/` contains configurations such as simple database connection and migration and web-routings.
 
 ## Notes:
 
-* Product must be created first.
+* Product must be created first. SKU is unique.
+* Transaction Number (Nomor kwitansi) in stock-in is unique.
 * User will reference product in stock-in and stock-out with product's SKU. If product with such SKU doesn't exist, response will be 422.
 * Product can be updated, but only its name.
 * Product can be destroyed (only if there is no stock-in and stock-out for that product).
-* User may create negative stock.
+* User may create "negative inventory" (can create stock-out without stock-in).
 * Stock in and Stock out can be updated and deleted.
 * Product current quantity is not stored in database.
 
@@ -61,6 +62,14 @@ cache-control: no-cache
 	"sku": "A0",
 	"name": "drawing book"
 }
+```
+
+Get Products List
+```
+GET /v1/products HTTP/1.1
+Host: localhost:8080
+Content-Type: application/json
+cache-control: no-cache
 ```
 
 Create Stock-in, must provide SKU of already made product.
@@ -108,5 +117,5 @@ Get Sales Report (start date and end date is optional, supply none, either or bo
 GET /v1/reports/sales_report.csv?start_date=2019-01-01&amp; end_date=2019-12-30 HTTP/1.1
 Host: localhost:8080
 cache-control: no-cache
-Postman-Token: 4d896bc9-5949-46c7-974b-f0cfd04a0dac
+
 ```
