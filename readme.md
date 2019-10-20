@@ -32,4 +32,6 @@ Project structure:
   1. `app/types` contains models/domains related to database.
   2. `app/handlers` contains handlers for handling business logic.
   3. `services` contains generic reusable services.
+  4. `app/paramstypes` contains structs to handle incoming web parameters.
+  5. `app/reporttypes` contains structs to handle report data modelling.
 * `configs/` contains configurations such as simple database connection and migration and routings.
