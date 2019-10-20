@@ -22,6 +22,7 @@ func GenerateRoutes() *gin.Engine {
 	web.DELETE("v1/stock_outs/:id", handlers.DeleteStockOut)
 
 	web.GET("v1/reports/inventory_valuation_summary", handlers.InventoryValuationSummary)
+	web.GET("v1/reports/sales_report_summary", handlers.SalesReportSummary)
 
 	web.GET("v1/reports/inventory_valuation.csv", handlers.InventoryValuation)
 	web.GET("v1/reports/sales_report.csv", handlers.SalesReport)
