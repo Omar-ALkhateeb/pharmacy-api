@@ -23,8 +23,18 @@ func CreateStockIn(c *gin.Context) {
 	var StockInParams paramstypes.StockInCreateWithSku
 
 	if c.ShouldBind(&StockInParams) == nil {
+		// =============================================================================
+		// VALIDATIONS
+		// =============================================================================
 		if StockInParams.ReceivedQuantity > StockInParams.OrderedQuantity {
 			c.String(422, "Received Quantity cannot be more than Ordered Quantity")
+			return
+		}
+
+		var stockInWithSimilarTransactionNumber types.StockIn
+		if err := db.Where("transaction_number = ?", StockInParams.TransactionNumber).
+			Find(&stockInWithSimilarTransactionNumber).Error; err == nil {
+			c.String(422, "Transaction Number already exists")
 			return
 		}
 
@@ -36,6 +46,7 @@ func CreateStockIn(c *gin.Context) {
 			newQuantity := product.CurrentQuantity + StockInParams.ReceivedQuantity
 			db.Model(&product).Update(types.Product{CurrentQuantity: newQuantity})
 		}
+		// =============================================================================
 
 		if errors := db.Create(&types.StockIn{
 			PricePerProduct:   StockInParams.PricePerProduct,
