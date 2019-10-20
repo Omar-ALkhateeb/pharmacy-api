@@ -20,9 +20,6 @@ func CreateStockOut(c *gin.Context) {
 		if err := db.Where("sku = ?", stockOutParams.Sku).First(&product).Error; err != nil {
 			c.String(422, "Product does not exist")
 			return
-		} else {
-			newQuantity := product.CurrentQuantity - stockOutParams.Quantity
-			db.Model(&product).Update(types.Product{CurrentQuantity: newQuantity})
 		}
 
 		if errors := db.Create(&types.StockOut{

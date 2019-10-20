@@ -42,9 +42,6 @@ func CreateStockIn(c *gin.Context) {
 		if err := db.Where("sku = ?", StockInParams.Sku).First(&product).Error; err != nil {
 			c.String(422, "Product does not exist")
 			return
-		} else {
-			newQuantity := product.CurrentQuantity + StockInParams.ReceivedQuantity
-			db.Model(&product).Update(types.Product{CurrentQuantity: newQuantity})
 		}
 		// =============================================================================
 

@@ -6,9 +6,8 @@ import (
 
 type Product struct {
 	gorm.Model
-	Sku             string `gorm:"unique_index;not_null"`
-	Name            string `gorm:"not_null;index:name"`
-	CurrentQuantity int    `gorm:"not_null;default:0"`
-	StockIns        []StockIn
-	StockOuts       []StockOut
+	Sku       string `gorm:"unique_index;not_null"`
+	Name      string `gorm:"not_null;index:name"`
+	StockIns  []StockIn
+	StockOuts []StockOut
 }
