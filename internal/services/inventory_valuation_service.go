@@ -21,9 +21,10 @@ func InventoryValuationCalculate() []reporttypes.InventoryValuation {
 		inventoryValuation.ProductSku = product.Sku
 		inventoryValuation.ProductName = product.Name
 
-		var totalQuantityStockIn int
 		var grandTotalPrice float32
 
+		totalQuantityStockIn := 0
+		grandTotalPrice = 0.0
 		for _, stockIn := range product.StockIns {
 			totalQuantityStockIn += stockIn.ReceivedQuantity
 			grandTotalPrice += float32(stockIn.ReceivedQuantity) * stockIn.PricePerProduct
@@ -31,7 +32,8 @@ func InventoryValuationCalculate() []reporttypes.InventoryValuation {
 
 		inventoryValuation.ProductQuantity = totalQuantityStockIn
 		inventoryValuation.ProductTotalPurchasePrice = grandTotalPrice
-		inventoryValuation.ProductAvgPurchasePrice = grandTotalPrice / float32(totalQuantityStockIn)
+		inventoryValuation.ProductAvgPurchasePrice = divideByPossibleZero(grandTotalPrice,
+			totalQuantityStockIn)
 
 		inventoryValuations = append(inventoryValuations, inventoryValuation)
 	}
