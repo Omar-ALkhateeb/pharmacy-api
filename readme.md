@@ -6,7 +6,7 @@ Record inventory/stocks for products.
 * Record stock ins with ordered and received quantity.
 * Record stock out.
 * Generate csv report for inventory values.
-* Generate csv report for stock out.
+* Generate csv report for sales report.
 
 ## Requirements:
 
@@ -35,6 +35,13 @@ Record inventory/stocks for products.
   4. `app/paramstypes` contains structs to handle incoming web parameters.
   5. `app/reporttypes` contains structs to handle report data modelling.
 * `configs/` contains configurations such as simple database connection and migration and routings.
+
+## Notes:
+
+* Product must be created first.
+* Product can be updated, but only its name.
+* Product can be destroyed (only if there is no stock-in and stock-out for that product).
+* User may create negative stock.
 
 ## Request Samples:
 (Check `configs/routes` for more detail.)
