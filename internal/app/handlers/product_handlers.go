@@ -8,12 +8,23 @@ import (
 
 func CreateProduct(c *gin.Context) {
 	var product types.Product
+
+	var responseCode int
+	responseMessage := ""
 	if c.ShouldBind(&product) == nil {
-		database.DBConn.Create(&types.Product{
+		if errors := database.DBConn.Create(&types.Product{
 			Name:            product.Name,
 			Sku:             product.Sku,
-			CurrentQuantity: product.CurrentQuantity})
+			CurrentQuantity: product.CurrentQuantity}).GetErrors(); len(errors) > 0 {
+			responseCode = 422
+			for _, err := range errors {
+				responseMessage = responseMessage + ", " + err.Error()
+			}
+		} else {
+			responseCode = 201
+			responseMessage = "Created"
+		}
 	}
 
-	c.String(201, "Created")
+	c.String(responseCode, responseMessage)
 }
