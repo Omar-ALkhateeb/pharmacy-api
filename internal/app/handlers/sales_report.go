@@ -24,9 +24,9 @@ func SalesReport(c *gin.Context) {
 	// CSV content
 	for _, rep := range salesReports {
 		row := []string{rep.SalesNote, rep.Time.String(), rep.ProductSku,
-			rep.ProductName, string(rep.Quantity), fmt.Sprintf("%f", rep.SellPricePerProduct),
-			fmt.Sprintf("%f", rep.TotalSellPricePerProduct), fmt.Sprintf("%f", rep.BuyPricePerProduct),
-			fmt.Sprintf("%f", rep.TotalBuyPricePerProduct), fmt.Sprintf("%f", rep.ProfitOrLoss)}
+			rep.ProductName, string(rep.Quantity), fmt.Sprintf("IDR %.2f", rep.SellPricePerProduct),
+			fmt.Sprintf("IDR %.2f", rep.TotalSellPricePerProduct), fmt.Sprintf("IDR %.2f", rep.BuyPricePerProduct),
+			fmt.Sprintf("IDR %.2f", rep.TotalBuyPricePerProduct), fmt.Sprintf("IDR %.2f", rep.ProfitOrLoss)}
 		_ = csvWriter.Write(row)
 	}
 	csvWriter.Flush()
