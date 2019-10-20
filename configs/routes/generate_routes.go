@@ -10,6 +10,7 @@ func GenerateRoutes() *gin.Engine {
 	web.GET("/ping", handlers.HandlePing)
 
 	web.POST("v1/products", handlers.CreateProduct)
+	web.PATCH("v1/products/:id", handlers.UpdateProduct)
 
 	web.POST("v1/stock_ins", handlers.CreateStockIn)
 
