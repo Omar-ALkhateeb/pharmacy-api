@@ -6,7 +6,7 @@ Record inventory/stocks for products.
 * Record stock ins with ordered and received quantity.
 * Record stock out.
 * Generate csv report for inventory values.
-* Generate csv report for stock out.
+* Generate csv report for sales report.
 
 ## Requirements:
 
@@ -24,7 +24,7 @@ Record inventory/stocks for products.
 * Set $GOPATH variable
 * go get -u github.com/dwahyudi/inventory
 * go build github.com/dwahyudi/inventory
-* run ./inventory
+* run `./inventory`
 
 ## Project structure:
 
@@ -35,6 +35,16 @@ Record inventory/stocks for products.
   4. `app/paramstypes` contains structs to handle incoming web parameters.
   5. `app/reporttypes` contains structs to handle report data modelling.
 * `configs/` contains configurations such as simple database connection and migration and routings.
+
+## Notes:
+
+* Product must be created first.
+* User will reference product in stock-in and stock-out with product's SKU. If product with such SKU doesn't exist, response will be 422.
+* Product can be updated, but only its name.
+* Product can be destroyed (only if there is no stock-in and stock-out for that product).
+* User may create negative stock.
+* Stock in and Stock out can be updated and deleted.
+* Product current quantity is not stored in database.
 
 ## Request Samples:
 (Check `configs/routes` for more detail.)
@@ -91,4 +101,12 @@ Get Inventory Valuation Report in CSV
 GET /v1/reports/inventory_valuation.csv HTTP/1.1
 Host: localhost:8080
 cache-control: no-cache
+```
+
+Get Sales Report (start date and end date is optional, supply none, either or both)
+```
+GET /v1/reports/sales_report.csv?start_date=2019-01-01&amp; end_date=2019-12-30 HTTP/1.1
+Host: localhost:8080
+cache-control: no-cache
+Postman-Token: 4d896bc9-5949-46c7-974b-f0cfd04a0dac
 ```
