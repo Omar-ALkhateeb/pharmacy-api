@@ -31,12 +31,12 @@ func SalesReportCalculate() []reporttypes.SalesReport {
 
 		salesReport.SellPricePerProduct = stockOut.PricePerProduct
 		totalSellPrice := stockOut.PricePerProduct * float32(stockOut.Quantity)
-		salesReport.TotalPricePerProduct = totalSellPrice
+		salesReport.TotalSellPricePerProduct = totalSellPrice
 
 		buyPricePerProduct := skuAndAvgBuyPrices[stockOut.Product.Sku]
 		salesReport.BuyPricePerProduct = buyPricePerProduct
 		totalBuyPrice := buyPricePerProduct * float32(stockOut.Quantity)
-		salesReport.TotalPricePerProduct = totalBuyPrice
+		salesReport.TotalSellPricePerProduct = totalBuyPrice
 
 		salesReport.ProfitOrLoss = totalSellPrice - totalBuyPrice
 		salesReports = append(salesReports, salesReport)

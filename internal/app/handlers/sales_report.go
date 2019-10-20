@@ -25,7 +25,7 @@ func SalesReport(c *gin.Context) {
 	for _, rep := range salesReports {
 		row := []string{rep.SalesNote, rep.Time.String(), rep.ProductSku,
 			rep.ProductName, string(rep.Quantity), fmt.Sprintf("%f", rep.SellPricePerProduct),
-			fmt.Sprintf("%f", rep.TotalPricePerProduct), fmt.Sprintf("%f", rep.BuyPricePerProduct),
+			fmt.Sprintf("%f", rep.TotalSellPricePerProduct), fmt.Sprintf("%f", rep.BuyPricePerProduct),
 			fmt.Sprintf("%f", rep.TotalBuyPricePerProduct), fmt.Sprintf("%f", rep.ProfitOrLoss)}
 		_ = csvWriter.Write(row)
 	}
