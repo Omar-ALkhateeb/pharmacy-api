@@ -24,7 +24,7 @@ Record inventory/stocks for products.
 * Set $GOPATH variable
 * go get -u github.com/dwahyudi/inventory
 * go build github.com/dwahyudi/inventory
-* run ./inventory
+* run `./inventory`
 
 ## Project structure:
 
@@ -91,4 +91,12 @@ Get Inventory Valuation Report in CSV
 GET /v1/reports/inventory_valuation.csv HTTP/1.1
 Host: localhost:8080
 cache-control: no-cache
+```
+
+Get Sales Report (start date and end date is optional, supply none, either or both)
+```
+GET /v1/reports/sales_report.csv?start_date=2019-01-01&amp; end_date=2019-12-30 HTTP/1.1
+Host: localhost:8080
+cache-control: no-cache
+Postman-Token: 4d896bc9-5949-46c7-974b-f0cfd04a0dac
 ```
