@@ -14,6 +14,7 @@ func GenerateRoutes() *gin.Engine {
 	web.DELETE("v1/products/:id", handlers.DeleteProduct)
 
 	web.POST("v1/stock_ins", handlers.CreateStockIn)
+	web.PATCH("v1/stock_ins/:id", handlers.UpdateStockIn)
 
 	web.POST("v1/stock_outs", handlers.CreateStockOut)
 
