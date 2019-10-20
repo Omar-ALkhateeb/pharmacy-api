@@ -17,6 +17,7 @@ func GenerateRoutes() *gin.Engine {
 	web.PATCH("v1/stock_ins/:id", handlers.UpdateStockIn)
 
 	web.POST("v1/stock_outs", handlers.CreateStockOut)
+	web.PATCH("v1/stock_outs/:id", handlers.UpdateStockOut)
 
 	web.GET("v1/reports/inventory_valuation.csv", handlers.InventoryValuation)
 	web.GET("v1/reports/sales_report.csv", handlers.SalesReport)
