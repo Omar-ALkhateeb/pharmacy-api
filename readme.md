@@ -39,9 +39,12 @@ Record inventory/stocks for products.
 ## Notes:
 
 * Product must be created first.
+* User will reference product in stock-in and stock-out with product's SKU. If product with such SKU doesn't exist, response will be 422.
 * Product can be updated, but only its name.
 * Product can be destroyed (only if there is no stock-in and stock-out for that product).
 * User may create negative stock.
+* Stock in and Stock out can be updated and deleted.
+* Product current quantity is not stored in database.
 
 ## Request Samples:
 (Check `configs/routes` for more detail.)
