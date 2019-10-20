@@ -8,17 +8,17 @@ Record inventory/stocks for products.
 * Generate csv report for inventory values.
 * Generate csv report for stock out.
 
-Requirements:
+## Requirements:
 
 * Golang 1.12
 
-Dependencies:
+## Dependencies:
 
 * go get -u github.com/gin-gonic/gin
 * go get -v github.com/mattn/go-sqlite3
 * go get -u github.com/jinzhu/gorm
 
-How to run:
+## How to run:
 
 * Install Golang 1.12
 * Set $GOPATH variable
@@ -26,7 +26,7 @@ How to run:
 * go build github.com/dwahyudi/inventory
 * run ./inventory
 
-Project structure:
+## Project structure:
 
 * `internal/` handles app code.
   1. `app/types` contains models/domains related to database.
@@ -36,7 +36,7 @@ Project structure:
   5. `app/reporttypes` contains structs to handle report data modelling.
 * `configs/` contains configurations such as simple database connection and migration and routings.
 
-Request Samples:
+## Request Samples:
 (Check `configs/routes` for more detail.)
 
 Create product (user must create product before creating stock in and stock out).
