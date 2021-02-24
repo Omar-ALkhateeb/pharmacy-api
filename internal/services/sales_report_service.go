@@ -1,10 +1,11 @@
 package services
 
 import (
-	"github.com/dwahyudi/inventory/configs/database"
-	"github.com/dwahyudi/inventory/internal/app/reporttypes"
-	"github.com/dwahyudi/inventory/internal/app/types"
 	"time"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/reporttypes"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/types"
 )
 
 // Get inventory valuations in order to get buy price.
@@ -17,7 +18,7 @@ func SalesReportCalculate(startDateString string, endDateString string) []report
 
 	skuAndAvgBuyPrices := make(map[string]float32)
 	for _, iv := range inventoryValuations {
-		skuAndAvgBuyPrices[iv.ProductSku] = iv.ProductAvgPurchasePrice
+		skuAndAvgBuyPrices[iv.ProductBarcode] = iv.ProductAvgPurchasePrice
 	}
 
 	startDate, _ := time.Parse(time.RFC3339, startDateString+"T00:00:00.000Z")
@@ -31,7 +32,7 @@ func SalesReportCalculate(startDateString string, endDateString string) []report
 		var salesReport = reporttypes.SalesReport{}
 		salesReport.SalesNote = stockOut.Note
 		salesReport.Time = stockOut.Time
-		salesReport.ProductSku = stockOut.Product.Sku
+		salesReport.ProductBarcode = stockOut.Product.Barcode
 		salesReport.ProductName = stockOut.Product.Name
 		salesReport.Quantity = stockOut.Quantity
 
@@ -41,7 +42,7 @@ func SalesReportCalculate(startDateString string, endDateString string) []report
 		salesReport.TotalSellPricePerProduct = totalSellPrice
 
 		// Buy prices
-		buyPricePerProduct := skuAndAvgBuyPrices[stockOut.Product.Sku]
+		buyPricePerProduct := skuAndAvgBuyPrices[stockOut.Product.Barcode]
 		salesReport.BuyPricePerProduct = buyPricePerProduct
 		totalBuyPrice := buyPricePerProduct * float32(stockOut.Quantity)
 		salesReport.TotalBuyPricePerProduct = totalBuyPrice

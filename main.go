@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/dwahyudi/inventory/configs/database"
-	"github.com/dwahyudi/inventory/configs/routes"
 	"log"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/routes"
 )
 
 func main() {

@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"github.com/dwahyudi/inventory/internal/app/reporttypes"
-	"github.com/dwahyudi/inventory/internal/services"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/reporttypes"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/services"
 	"github.com/gin-gonic/gin"
 )
 

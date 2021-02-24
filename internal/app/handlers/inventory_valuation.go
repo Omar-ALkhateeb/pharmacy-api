@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"encoding/csv"
 	"fmt"
-	"github.com/dwahyudi/inventory/internal/services"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/services"
+	"github.com/gin-gonic/gin"
 )
 
 func InventoryValuation(c *gin.Context) {
@@ -17,14 +18,14 @@ func InventoryValuation(c *gin.Context) {
 	csvWriter := csv.NewWriter(bytesBuffer)
 
 	// CSV header
-	headerRow := []string{"SKU", "Nama Item", "Jumlah", "Rata-Rata Harga Beli", "Total"}
+	headerRow := []string{"Barcode", "Item Name", "Qty", "Avg selling price", "Total"}
 	_ = csvWriter.Write(headerRow)
 
 	// CSV Content
 	for _, iv := range inventoryValuations {
-		row := []string{iv.ProductSku, iv.ProductName, fmt.Sprintf("%d", iv.ProductQuantity),
-			fmt.Sprintf("IDR %.2f", iv.ProductAvgPurchasePrice),
-			fmt.Sprintf("IDR %.2f", iv.ProductTotalPurchasePrice)}
+		row := []string{iv.ProductBarcode, iv.ProductName, fmt.Sprintf("%d", iv.ProductQuantity),
+			fmt.Sprintf("USD %.2f", iv.ProductAvgPurchasePrice),
+			fmt.Sprintf("USD %.2f", iv.ProductTotalPurchasePrice)}
 		_ = csvWriter.Write(row)
 	}
 

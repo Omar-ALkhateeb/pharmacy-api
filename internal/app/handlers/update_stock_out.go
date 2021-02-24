@@ -1,11 +1,13 @@
 package handlers
 
 import (
-	"github.com/dwahyudi/inventory/configs/database"
-	"github.com/dwahyudi/inventory/internal/app/paramstypes"
-	"github.com/dwahyudi/inventory/internal/app/types"
-	"github.com/gin-gonic/gin"
 	"time"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/paramstypes"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/types"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/services"
+	"github.com/gin-gonic/gin"
 )
 
 func UpdateStockOut(c *gin.Context) {
@@ -28,15 +30,20 @@ func UpdateStockOut(c *gin.Context) {
 		}
 
 		var product types.Product
-		if err := db.Where("sku = ?", stockOutParams.Sku).First(&product).Error; err != nil {
+		if err := db.Where("barcode = ?", stockOutParams.Barcode).First(&product).Error; err != nil {
 			c.String(422, "Product does not exist")
 			return
+		}
+
+		var convertionRate float32 = 1.0
+		if len(stockOutParams.Currency) > 0 {
+			convertionRate = services.ConvertCurrency(stockOutParams.Currency)
 		}
 
 		// =============================================================================
 
 		if errors := db.Model(&stockOut).Updates(&types.StockOut{
-			PricePerProduct: stockOutParams.PricePerProduct,
+			PricePerProduct: stockOutParams.PricePerProduct * convertionRate,
 			Quantity:        stockOutParams.Quantity,
 			Product:         product,
 			Note:            stockOutParams.Note,

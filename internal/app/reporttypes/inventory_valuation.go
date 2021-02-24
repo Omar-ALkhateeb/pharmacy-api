@@ -1,7 +1,7 @@
 package reporttypes
 
 type InventoryValuation struct {
-	ProductSku                string
+	ProductBarcode            string
 	ProductName               string
 	ProductQuantity           int
 	ProductAvgPurchasePrice   float32

@@ -1,9 +1,9 @@
 package services
 
 import (
-	"github.com/dwahyudi/inventory/configs/database"
-	"github.com/dwahyudi/inventory/internal/app/reporttypes"
-	"github.com/dwahyudi/inventory/internal/app/types"
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/reporttypes"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/types"
 )
 
 // A service to calculate inventory valuation.
@@ -18,7 +18,7 @@ func InventoryValuationCalculate() []reporttypes.InventoryValuation {
 
 	for _, product := range products {
 		var inventoryValuation = reporttypes.InventoryValuation{}
-		inventoryValuation.ProductSku = product.Sku
+		inventoryValuation.ProductBarcode = product.Barcode
 		inventoryValuation.ProductName = product.Name
 
 		var grandTotalPrice float32

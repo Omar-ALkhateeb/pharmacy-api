@@ -1,6 +1,6 @@
 package database
 
-import "github.com/dwahyudi/inventory/internal/app/types"
+import "github.com/Omar-ALkhateeb/pharm-inventory/internal/app/types"
 
 func Migrate() {
 	// Using auto migration feature from GORM framework.

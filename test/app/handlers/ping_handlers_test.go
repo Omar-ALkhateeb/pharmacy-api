@@ -1,10 +1,11 @@
 package handlers
 
 import (
-	"github.com/dwahyudi/inventory/configs/routes"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/routes"
 
 	"github.com/stretchr/testify/assert"
 )

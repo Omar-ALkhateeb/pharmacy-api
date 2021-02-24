@@ -2,10 +2,11 @@ package handlers
 
 import (
 	"fmt"
-	"github.com/dwahyudi/inventory/configs/database"
-	"github.com/dwahyudi/inventory/internal/app/reporttypes"
-	"github.com/dwahyudi/inventory/internal/app/types"
-	"github.com/dwahyudi/inventory/internal/services"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/reporttypes"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/types"
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/services"
 	"github.com/gin-gonic/gin"
 )
 

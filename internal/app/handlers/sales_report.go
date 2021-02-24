@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"encoding/csv"
 	"fmt"
-	"github.com/dwahyudi/inventory/internal/services"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+
+	"github.com/Omar-ALkhateeb/pharm-inventory/internal/services"
+	"github.com/gin-gonic/gin"
 )
 
 func SalesReport(c *gin.Context) {
@@ -17,17 +18,17 @@ func SalesReport(c *gin.Context) {
 	csvWriter := csv.NewWriter(bytesBuffer)
 
 	// CSV header
-	headerRow := []string{"ID Pesanan", "Waktu", "SKU", "Nama Barang", "Jumlah",
-		"Harga Jual per Produk", "Total Harga Jual", "Harga Beli per Produk",
-		"Total Harga Beli", "Laba/Rugi"}
+	headerRow := []string{"Order Note", "Date", "Barcode", "Item name", "Qty",
+		"Selling Price per Product", "Total Selling Price", "Purchase Price per Product",
+		"Total Purchase Price", "Profit and loss"}
 	_ = csvWriter.Write(headerRow)
 
 	// CSV content
 	for _, rep := range salesReports {
-		row := []string{rep.SalesNote, rep.Time.String(), rep.ProductSku,
-			rep.ProductName, string(rep.Quantity), fmt.Sprintf("IDR %.2f", rep.SellPricePerProduct),
-			fmt.Sprintf("IDR %.2f", rep.TotalSellPricePerProduct), fmt.Sprintf("IDR %.2f", rep.BuyPricePerProduct),
-			fmt.Sprintf("IDR %.2f", rep.TotalBuyPricePerProduct), fmt.Sprintf("IDR %.2f", rep.ProfitOrLoss)}
+		row := []string{rep.SalesNote, rep.Time.String(), rep.ProductBarcode,
+			rep.ProductName, fmt.Sprint(rep.Quantity), fmt.Sprintf("USD %.2f", rep.SellPricePerProduct),
+			fmt.Sprintf("USD %.2f", rep.TotalSellPricePerProduct), fmt.Sprintf("USD %.2f", rep.BuyPricePerProduct),
+			fmt.Sprintf("USD %.2f", rep.TotalBuyPricePerProduct), fmt.Sprintf("USD %.2f", rep.ProfitOrLoss)}
 		_ = csvWriter.Write(row)
 	}
 	csvWriter.Flush()
