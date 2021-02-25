@@ -27,17 +27,16 @@ func CreateProduct(c *gin.Context) {
 			category = "All"
 		}
 
-		if errors := database.DBConn.Create(&types.Product{
+		if err := database.DBConn.Create(&types.Product{
 			Name:      product.Name,
 			Barcode:   product.Barcode,
 			ExpiresIn: product.ExpiresIn,
 			Price:     product.Price * convertionRate,
 			Category:  category,
-		}).GetErrors(); len(errors) > 0 {
+		}).Error; err != nil {
 			responseCode = 422
-			for _, err := range errors {
-				responseMessage = responseMessage + ", " + err.Error()
-			}
+
+			responseMessage = responseMessage + ", " + err.Error()
 		} else {
 			responseCode = 201
 			responseMessage = "Created"

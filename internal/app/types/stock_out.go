@@ -3,7 +3,7 @@ package types
 import (
 	"time"
 
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 type StockOut struct {

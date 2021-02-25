@@ -14,7 +14,7 @@ func InventoryValuationSummary(c *gin.Context) {
 	db := database.DBConn
 	var inventoryValuationSummary reporttypes.InventoryValuationSummary
 
-	var productCount int
+	var productCount int64
 	db.Model(&types.Product{}).Count(&productCount)
 
 	var totalStockIn reporttypes.SumResult
@@ -34,7 +34,7 @@ func InventoryValuationSummary(c *gin.Context) {
 		totalValuation += iv.ProductTotalPurchasePrice
 	}
 
-	inventoryValuationSummary.ProductSkuCount = productCount
+	inventoryValuationSummary.ProductSkuCount = int(productCount)
 	inventoryValuationSummary.ProductTotalQuantity = productTotalQuantity
 	inventoryValuationSummary.TotalValuation = totalValuation
 

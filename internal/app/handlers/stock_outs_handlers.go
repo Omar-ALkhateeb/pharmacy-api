@@ -29,17 +29,16 @@ func CreateStockOut(c *gin.Context) {
 			convertionRate = services.ConvertCurrency(stockOutParams.Currency)
 		}
 
-		if errors := db.Create(&types.StockOut{
+		if err := db.Create(&types.StockOut{
 			PricePerProduct: stockOutParams.PricePerProduct * convertionRate,
 			Quantity:        stockOutParams.Quantity,
 			Product:         product,
 			Note:            stockOutParams.Note,
 			Time:            time.Now(),
-		}).GetErrors(); len(errors) > 0 {
+		}).Error; err != nil {
 			responseCode = 422
-			for _, err := range errors {
-				responseMessage = responseMessage + ", " + err.Error()
-			}
+
+			responseMessage = responseMessage + ", " + err.Error()
 		} else {
 			responseCode = 201
 			responseMessage = "Created"

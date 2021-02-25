@@ -1,8 +1,8 @@
 package database
 
 import (
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 var (
@@ -11,7 +11,7 @@ var (
 
 func Init() {
 	var err error
-	DBConn, err = gorm.Open("sqlite3", "./inventory.db")
+	DBConn, err = gorm.Open(sqlite.Open("inventory.db"), &gorm.Config{})
 	if err != nil {
 		panic(err)
 	}

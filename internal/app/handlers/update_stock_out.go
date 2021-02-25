@@ -42,17 +42,15 @@ func UpdateStockOut(c *gin.Context) {
 
 		// =============================================================================
 
-		if errors := db.Model(&stockOut).Updates(&types.StockOut{
+		if err := db.Model(&stockOut).Updates(&types.StockOut{
 			PricePerProduct: stockOutParams.PricePerProduct * convertionRate,
 			Quantity:        stockOutParams.Quantity,
 			Product:         product,
 			Note:            stockOutParams.Note,
 			Time:            time.Now(),
-		}).GetErrors(); len(errors) > 0 {
+		}).Error; err != nil {
 			responseCode = 422
-			for _, err := range errors {
-				responseMessage = responseMessage + ", " + err.Error()
-			}
+			responseMessage = responseMessage + ", " + err.Error()
 		} else {
 			responseCode = 201
 			responseMessage = "Updated"

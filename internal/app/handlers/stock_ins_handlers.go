@@ -77,7 +77,7 @@ func CreateStockIn(c *gin.Context) {
 
 		// =============================================================================
 
-		if errors := db.Create(&types.StockIn{
+		if err := db.Create(&types.StockIn{
 			PricePerProduct:   StockInParams.PricePerProduct * convertionRate,
 			TransactionNumber: StockInParams.TransactionNumber,
 			OrderedQuantity:   StockInParams.OrderedQuantity,
@@ -86,11 +86,10 @@ func CreateStockIn(c *gin.Context) {
 			Note:              StockInParams.Note,
 			StartTime:         startDate,
 			EndTime:           endDate,
-		}).GetErrors(); len(errors) > 0 {
+		}).Error; err != nil {
 			responseCode = 422
-			for _, err := range errors {
-				responseMessage = responseMessage + ", " + err.Error()
-			}
+
+			responseMessage = responseMessage + ", " + err.Error()
 		} else {
 			responseCode = 201
 			responseMessage = "Created"

@@ -73,7 +73,7 @@ func UpdateStockIn(c *gin.Context) {
 
 		// =============================================================================
 
-		if errors := db.Model(&stockIn).Updates(&types.StockIn{
+		if err := db.Model(&stockIn).Updates(&types.StockIn{
 			PricePerProduct:   StockInParams.PricePerProduct * convertionRate,
 			TransactionNumber: StockInParams.TransactionNumber,
 			OrderedQuantity:   StockInParams.OrderedQuantity,
@@ -82,11 +82,10 @@ func UpdateStockIn(c *gin.Context) {
 			Note:              StockInParams.Note,
 			StartTime:         startDate,
 			EndTime:           endDate,
-		}).GetErrors(); len(errors) > 0 {
+		}).Error; err != nil {
 			responseCode = 422
-			for _, err := range errors {
-				responseMessage = responseMessage + ", " + err.Error()
-			}
+
+			responseMessage = responseMessage + ", " + err.Error()
 		} else {
 			responseCode = 200
 			responseMessage = "Updated"
