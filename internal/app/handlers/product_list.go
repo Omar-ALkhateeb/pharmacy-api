@@ -11,7 +11,7 @@ import (
 
 func ProductList(c *gin.Context) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
-	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "3"))
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 	name := c.DefaultQuery("name", "")
 	db := database.DBConn
 	var products []types.Product

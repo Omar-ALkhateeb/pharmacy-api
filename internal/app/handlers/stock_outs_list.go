@@ -1,16 +1,20 @@
 package handlers
 
 import (
+	"strconv"
+
 	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
 	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/types"
 	"github.com/gin-gonic/gin"
 )
 
 func StockOutsList(c *gin.Context) {
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 	db := database.DBConn
 	var stockOuts []types.StockOut
 
-	db.Preload("Product").Find(&stockOuts)
+	db.Offset(page * limit).Preload("Product").Find(&stockOuts)
 
 	var StockOutsList []types.StockOutView
 
