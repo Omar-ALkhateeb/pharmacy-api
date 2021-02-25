@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/Omar-ALkhateeb/pharm-inventory/configs/database"
@@ -11,10 +12,14 @@ import (
 func ProductList(c *gin.Context) {
 	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "3"))
+	name := c.DefaultQuery("name", "")
 	db := database.DBConn
 	var products []types.Product
 
-	db.Offset(page * limit).Limit(limit).Preload("StockIns").Preload("StockOuts").
+	fmt.Println("%" + name + "%")
+
+	db.Offset(page*limit).Limit(limit).Order("category").Preload("StockIns").Preload("StockOuts").
+		Where("name LIKE ?", "%"+name+"%").
 		Find(&products)
 
 	var productsList []types.ProductInView
