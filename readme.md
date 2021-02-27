@@ -18,9 +18,7 @@ Record inventory/stocks for products.
 
 ## Dependencies:
 
-- go get -u github.com/gin-gonic/gin
-- go get -v github.com/mattn/go-sqlite3
-- go get -u github.com/jinzhu/gorm
+- go get
 
 ## Project structure:
 
