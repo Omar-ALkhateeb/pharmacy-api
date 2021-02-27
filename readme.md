@@ -7,6 +7,10 @@ Record inventory/stocks for products.
 - Record stock out.
 - Generate csv report for inventory values.
 - Generate csv report for sales report.
+- mass import stock from csv files.
+- use multiple currencies simultaneously without any errors.
+- filter and search through products.
+- pagination support.
 
 ## Requirements:
 
@@ -17,14 +21,6 @@ Record inventory/stocks for products.
 - go get -u github.com/gin-gonic/gin
 - go get -v github.com/mattn/go-sqlite3
 - go get -u github.com/jinzhu/gorm
-
-## How to run:
-
-- Install Golang 1.12
-- Set $GOPATH variable
-- go get -u github.com/dwahyudi/inventory
-- go build github.com/dwahyudi/inventory
-- run `./inventory`
 
 ## Project structure:
 
@@ -63,14 +59,18 @@ cache-control: no-cache
 
 {
 	"Barcode": "A0",
-	"name": "drawing book"
+	"name": "drawing book",
+	"Category": "All",
+	"ExpiresIn": 200,
+	"Price": 40,
+	"currency": "IQD"
 }
 ```
 
 Get Products List
 
 ```
-GET /v1/products HTTP/1.1
+GET /v1/products?page=0&limit=5&name=draw HTTP/1.1
 Host: localhost:8080
 Content-Type: application/json
 cache-control: no-cache
@@ -89,7 +89,8 @@ cache-control: no-cache
 	"price_per_product": 11000.0,
 	"transaction_number": "T0",
 	"ordered_quantity": 100,
-	"received_quantity": 100
+	"received_quantity": 100,
+	"currency": "USD"
 }
 ```
 
@@ -104,7 +105,8 @@ cache-control: no-cache
 {
 	"Barcode": "A0",
 	"price_per_product": 15000.0,
-	"quantity": 80
+	"quantity": 80,
+	"currency": "IQD"
 }
 ```
 
