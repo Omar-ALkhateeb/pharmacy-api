@@ -41,3 +41,10 @@ func SalesReport(c *gin.Context) {
 	c.Header("Content-Disposition", "attachment; filename=sales_report.csv")
 	c.Data(http.StatusOK, "text/csv", bytesBuffer.Bytes())
 }
+
+func SalesReportJson(c *gin.Context) {
+	startDate, endDate := services.DecideDate(c)
+	salesReports := services.SalesReportCalculate(startDate, endDate)
+
+	c.JSON(200, salesReports)
+}

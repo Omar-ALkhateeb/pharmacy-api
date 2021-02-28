@@ -2,11 +2,23 @@ package routes
 
 import (
 	"github.com/Omar-ALkhateeb/pharm-inventory/internal/app/handlers"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
 func GenerateRoutes() *gin.Engine {
 	web := gin.Default()
+	corsConfig := cors.DefaultConfig()
+
+	corsConfig.AllowOrigins = []string{"*"}
+	// To be able to send tokens to the server.
+	corsConfig.AllowCredentials = true
+
+	// OPTIONS method for ReactJS
+	corsConfig.AddAllowMethods("OPTIONS")
+
+	// Register the middleware
+	web.Use(cors.New(corsConfig))
 	web.GET("/ping", handlers.HandlePing)
 
 	web.GET("v1/products", handlers.ProductList)
@@ -30,7 +42,9 @@ func GenerateRoutes() *gin.Engine {
 	web.GET("v1/reports/sales_report_summary", handlers.SalesReportSummary)
 
 	web.GET("v1/reports/inventory_valuation.csv", handlers.InventoryValuation)
+	web.GET("v1/reports/inventory_valuation", handlers.InventoryValuationJson)
 	web.GET("v1/reports/sales_report.csv", handlers.SalesReport)
+	web.GET("v1/reports/sales_report", handlers.SalesReportJson)
 
 	return web
 }

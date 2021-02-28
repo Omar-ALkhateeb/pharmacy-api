@@ -39,3 +39,9 @@ func InventoryValuation(c *gin.Context) {
 	c.Header("Content-Disposition", "attachment; filename=inventory_valuation.csv")
 	c.Data(http.StatusOK, "text/csv", bytesBuffer.Bytes())
 }
+
+func InventoryValuationJson(c *gin.Context) {
+	inventoryValuations := services.InventoryValuationCalculate()
+
+	c.JSON(200, inventoryValuations)
+}

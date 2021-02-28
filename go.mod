@@ -3,6 +3,7 @@ module github.com/Omar-ALkhateeb/pharm-inventory
 go 1.14
 
 require (
+	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.6.3
 	github.com/gocarina/gocsv v0.0.0-20201208093247-67c824bc04d4
 	github.com/mattn/go-sqlite3 v1.14.6 // indirect

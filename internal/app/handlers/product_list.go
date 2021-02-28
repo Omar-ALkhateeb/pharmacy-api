@@ -10,7 +10,7 @@ import (
 )
 
 func ProductList(c *gin.Context) {
-	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "0"))
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 	name := c.DefaultQuery("name", "")
 	db := database.DBConn

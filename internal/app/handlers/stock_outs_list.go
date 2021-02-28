@@ -9,12 +9,12 @@ import (
 )
 
 func StockOutsList(c *gin.Context) {
-	page, _ := strconv.Atoi(c.DefaultQuery("page", "1"))
+	page, _ := strconv.Atoi(c.DefaultQuery("page", "0"))
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "10"))
 	db := database.DBConn
 	var stockOuts []types.StockOut
 
-	db.Offset(page * limit).Preload("Product").Find(&stockOuts)
+	db.Offset(page * limit).Limit(limit).Preload("Product").Find(&stockOuts)
 
 	var StockOutsList []types.StockOutView
 

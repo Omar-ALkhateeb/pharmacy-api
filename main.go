@@ -9,6 +9,7 @@ import (
 
 func main() {
 	database.Prepare()
+
 	web := routes.GenerateRoutes()
 
 	log.Fatal(web.Run())
