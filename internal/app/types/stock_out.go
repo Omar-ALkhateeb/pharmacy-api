@@ -17,6 +17,7 @@ type StockOut struct {
 }
 
 type StockOutView struct {
+	ID              uint
 	Time            time.Time
 	Product         Product
 	PricePerProduct float32

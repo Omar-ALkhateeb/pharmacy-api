@@ -19,6 +19,7 @@ func ProductListOne(c *gin.Context) {
 
 	currentQuantity := calculateCurrentQuantity(product)
 	productShow := types.ProductInView{
+		ID:              product.ID,
 		Barcode:         product.Barcode,
 		Name:            product.Name,
 		CurrentQuantity: currentQuantity,

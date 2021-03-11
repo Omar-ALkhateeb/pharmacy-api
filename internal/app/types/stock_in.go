@@ -23,6 +23,7 @@ type StockInView struct {
 	StartTime         time.Time // manufacture time
 	EndTime           time.Time // expire time
 	Product           Product
+	ID                uint
 	PricePerProduct   float32
 	TransactionNumber string
 	Note              string

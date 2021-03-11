@@ -17,6 +17,7 @@ type Product struct {
 
 // for view and export
 type ProductInView struct {
+	ID              uint
 	Barcode         string
 	Name            string
 	CurrentQuantity int
