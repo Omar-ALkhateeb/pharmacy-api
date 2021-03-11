@@ -68,6 +68,7 @@ func CreateStockIn(c *gin.Context) {
 		}
 		if len(StockInParams.EndTime) > 0 {
 			fmt.Println("here!")
+			fmt.Println(StockInParams.EndTime)
 			date, _ := time.Parse(time.RFC3339, StockInParams.EndTime+"T00:00:00.000Z")
 			endDate = date
 		} else {
