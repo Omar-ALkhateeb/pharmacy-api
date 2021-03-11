@@ -36,7 +36,8 @@ func CreateStockIn(c *gin.Context) {
 
 		var stockInWithSimilarTransactionNumber types.StockIn
 		if err := db.Where("transaction_number = ?", StockInParams.TransactionNumber).
-			Find(&stockInWithSimilarTransactionNumber).Error; err == nil {
+			First(&stockInWithSimilarTransactionNumber).Error; err == nil {
+			fmt.Println(stockInWithSimilarTransactionNumber.TransactionNumber)
 			c.String(422, "Transaction Number already exists")
 			return
 		}
